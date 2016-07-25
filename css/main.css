@@ -14,21 +14,19 @@ pre{
   border: none !important;
 }
 
+button.transparent {
+  background: transparent;
+}
+
+span.glyphicon {
+  font-size: 20px;
+}
+
 .col {
   position: absolute;
   top: 70px;
   bottom: 0px;
   overflow-y: scroll;
-}
-
-.right{
-  left: 25%%;
-  width: 75%;
-}
-
-.left{
-  left: 10px;
-  width: 50%;
 }
 
 .base{
@@ -37,6 +35,32 @@ pre{
 
 .bottom-space{
   margin-bottom: 20px;
+}
+
+.tweet-post-action{
+  margin-top: 10px;
+  height: 50px;
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.tweet-post-action span {
+  margin-right: 10px;
+}
+
+.tweet-post-action > button {
+  border: none;
+}
+
+.tweet-post-action > button > span {
+  color: #337ab7;
+}
+
+.tweet-post-action span.glyphicon{
+  vertical-align: middle;
+  font-size: 30px
 }
 
 .panel-footer-action{

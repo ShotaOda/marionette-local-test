@@ -107,7 +107,7 @@ $(function(){
     // message pattern (implementing by Wreqr.RequestResponse)
     App.wreqr = new Backbone.Wreqr.RequestResponse();
     App.wreqr.setHandlers({
-      navigate: function (to) {
+       navigate: function (to) {
         Backbone.history.navigate(to, true)
       }
     })

@@ -1,10 +1,15 @@
 var tweetModel = Backbone.Model.extend({
-
+  defaults: {
+    date: moment()
+  }
 })
 
 var tweetCollection = Backbone.Collection.extend({
-
    model: tweetModel
+
+  ,comparator: function (model) {
+    return -model.get("date")
+  }
 
   ,parse: function (resp){
     if (resp.error) console.log("error")

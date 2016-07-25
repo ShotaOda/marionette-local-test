@@ -2,9 +2,16 @@
   <div class="col-md-8 col-md-offset-3 col-sm-offset-4">
     <div class="panel panel-default">
       <div class="panel-body">
-        <textarea class="form-control" rows="3"></textarea>
-        <button class="btn btn-default pull-right">添付する</button>
-        <button class="btn btn-default pull-right">投稿する</button>
+        <textarea id="tweet-input" class="form-control" rows="5"></textarea>
+        <div class="tweet-post-action">
+          <button class="transparent">
+            <span class="glyphicon glyphicon-camera"></span>
+          </button>
+          <div class="pull-right">
+            <span class="text-counter">140</span>
+            <button id="tweet-post-button" class="btn btn-primary">投稿する</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
