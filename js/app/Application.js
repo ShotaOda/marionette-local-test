@@ -38,12 +38,14 @@ var controller = Backbone.Marionette.Object.extend({
   * ルーティング
   ********************************************************************************************* */
   ,welcome: function () {
-    var col = new tweetCollection()
-    App.RootLayout.showChildView('main', new tweetCompositeView({
-      collection: col
+    App.Collection = {}
+    App.Collection.tweet = new tweetCollection()
+    var tweetCol = App.Collection.tweet
+    App.RootLayout.showChildView('main', new tweetLayoutView({
+      tweetCol: tweetCol
     }));
     for (var i =0; i < 100; i++ ){
-      col.add({title: "author", content: `text No.${i}`})
+      tweetCol.add({title: "author", content: `text No.${i}`})
     }
   }
 
@@ -109,6 +111,16 @@ $(function(){
     App.wreqr.setHandlers({
        navigate: function (to) {
         Backbone.history.navigate(to, true)
+      }
+      ,postTweet: function ($form) {
+        App.Collection.tweet.add({
+           title: 'ubuntu'
+          ,content: $form.find('#tweet-input').val()
+          ,date: moment()
+        })
+      }
+      ,actionToken: function() {
+        return /*TODO 通信*/ "UUID:J3aojfa532el4akK"
       }
     })
 

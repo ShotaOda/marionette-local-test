@@ -54,11 +54,12 @@ span.glyphicon {
   border: none;
 }
 
-.tweet-post-action > button > span {
+.tweet-post-action > label {
   color: #337ab7;
+  cursor: pointer;
 }
 
-.tweet-post-action span.glyphicon{
+.tweet-post-action label.glyphicon{
   vertical-align: middle;
   font-size: 30px
 }

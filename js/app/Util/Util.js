@@ -1,14 +1,13 @@
 var Util = Util || {};
 
 (function () {
-  console.log(Util);
   Util.Date = {
     getTweetDateStr: function (date) {
       var now = moment();
       // seconds
       var secDiff = now.diff(date, 'seconds')
       if (secDiff <= 10){
-          return 'たった今'
+        return 'たった今'
       }
       if (secDiff < 60){
         return `${secDiff}秒前`
@@ -36,8 +35,15 @@ var Util = Util || {};
     }
   };
 
-  Util.File = {
-    //TODO ファイル読み取り実装
-    //http://www.html5rocks.com/ja/tutorials/file/dndfiles/
-  }
+  var fileApi = Marionette.Object.extend({
+    asyncParseDataUrl: function(file, func) {
+      var reader = new FileReader();
+      reader.onload = function(result){
+        func(result.target.result)
+      };
+      reader.readAsDataURL(file)
+    }
+  });
+
+  Util.File = new fileApi()
 })();
