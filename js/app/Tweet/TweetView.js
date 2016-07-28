@@ -42,7 +42,8 @@ var userItemView = Backbone.Marionette.ItemView.extend({
 
 // tweet Base Layout
 var tweetLayoutView = Backbone.Marionette.LayoutView.extend({
-   template: TMPL['TweetLayout.hbs']
+   id: LAYOUTID.TWEETLAYOUT
+  ,template: TMPL['TweetLayout.hbs']
   ,regions: {
      inputForm: '#input-form-region'
     ,tweetList: '#tweet-list-region'
@@ -55,7 +56,7 @@ var tweetLayoutView = Backbone.Marionette.LayoutView.extend({
       collection: new Backbone.Collection()
     }))
     this.showChildView('tweetList', new tweetListCompositeView({
-      collection: this.option.tweetCol
+      collection: this.option.tweetCollection
     }))
   }
 });

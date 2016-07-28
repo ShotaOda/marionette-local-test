@@ -6,6 +6,9 @@ var Util = Util || {};
       var now = moment();
       // seconds
       var secDiff = now.diff(date, 'seconds')
+      if (secDiff < 0){
+        return `Oh gosh！ 未来からの投稿です：${date.format('YYYY-M-D')}`
+      }
       if (secDiff <= 10){
         return 'たった今'
       }

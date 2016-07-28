@@ -30,36 +30,51 @@ var controller = Backbone.Marionette.Object.extend({
 
   }
 
-  ,_showMain: function (view) {
-    App.RootLayout.showChildView('main', view)
+  ,_stopLoadings: function () {
+    this._loadingCollections.forEach(function (collection) {
+      collection.stop()
+    })
   }
+
+  ,_showMainTweetList: function (tweetCollection) {
+    var child = App.RootLayout.getChildView('main')
+    if(child && child.id === LAYOUTID.TWEETLAYOUT){
+      child.showChildView('tweetList', new tweetListCompositeView({
+        collection: tweetCollection
+      }));
+    } else {
+      App.RootLayout.showChildView('main', new tweetLayoutView({
+        tweetCollection: tweetCollection
+      }))
+    }
+    this._loadingCollections.push(tweetCollection)
+    tweetCollection.load()
+  }
+
+  ,_loadingCollections: []
 
   /* *********************************************************************************************
   * ルーティング
   ********************************************************************************************* */
   ,welcome: function () {
-    App.Collection = {}
-    App.Collection.tweet = new tweetCollection()
-    var tweetCol = App.Collection.tweet
-    App.RootLayout.showChildView('main', new tweetLayoutView({
-      tweetCol: tweetCol
-    }));
-    for (var i =0; i < 100; i++ ){
-      tweetCol.add({title: "author", content: `text No.${i}`})
-    }
+    this._stopLoadings()
+
+    App.Collection.tweet = App.Collection.tweet || new tweetCollection()
+
+    this._showMainTweetList(App.Collection.tweet)
   }
 
   ,tweets: function () {
-    var col = new tweetCollection()
-    App.RootLayout.showChildView('main', new tweetCompositeView({
-      collection: col
-    }));
-    for (var i =0; i < 100; i++ ){
-      col.add({title: "ubuntu", content: `this is my tweet.${i}`})
-    }
+    this._stopLoadings()
+
+    App.Collection.mytweet = App.Collection.mytweet || new tweetCollection()
+
+    this._showMainTweetList(App.Collection.mytweet)
   }
 
   ,follow: function () {
+    this._stopLoadings()
+
     var users = new Backbone.Collection()
     App.RootLayout.showChildView('main', new userCompositeView({
       collection: users
@@ -70,6 +85,8 @@ var controller = Backbone.Marionette.Object.extend({
   }
 
   ,follower: function () {
+    this._stopLoadings()
+
     var users = new Backbone.Collection()
     App.RootLayout.showChildView('main', new userCompositeView({
       collection: users
@@ -99,6 +116,7 @@ $(function(){
   App.on('application: before:start', function () {
     console.log('before:start');
     App.RootLayout = new IMPL.RootLayoutView();
+    App.Collection = {};
 
     // ルーティング生成
     App.Router = new router({
