@@ -39,27 +39,60 @@
 <body>
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
-      <!-- Brand and toggle get grouped for mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#MenuCollapse" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <p class="navbar-text">Hobby!</p>
-      </div>
-      <div class="collapse navbar-collapse" id="MenuCollapse">
-        <ul class="nav navbar-nav">
-          <li><a href="#">Coming Soon</a></li>
-          <li><a href="#">Coming Soon</a></li>
-          <li class="active"><a id="nav-Twit" href="#">Twit</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a>Coming Soon</a></li>
-          <li><a href="#">Setting</a></li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
+      <div class="row">
+        <div class="col-md-offset-1 col-md-9">
+          <!-- Brand and toggle get grouped for mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#MenuCollapse" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Twitter</a>
+          </div>
+          <div class="collapse navbar-collapse" id="MenuCollapse">
+            <ul class="nav navbar-nav">
+              <li id="nav-tweetlist">
+                <a href="#">
+                  <span class="glyphicon glyphicon-menu-hamburger"></span>
+                  ツイートリスト
+                </a>
+              </li>
+              <li id="nav-mypage">
+                <a href="#home">
+                  <span class="glyphicon glyphicon-info-sign"></span>
+                  マイページ
+                </a>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li id="nav-user" class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  <span class="glyphicon glyphicon-user"></span>
+                  ubuntu
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#setting">アカウント切り替え</a></li>
+                  <li><a href="#setting">アカウント管理</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">ログアウト</a></li>
+                </ul>
+              </li>
+              <li id="nav-setting" class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  <span class="glyphicon glyphicon-cog"></span>
+                  設定
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#profile">プロフィール</a></li>
+                  <li><a href="#setting">詳細設定</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.col-md-offset-1 col-md-9 -->
+      </div><!-- /.row -->
     </div><!-- /.container-fluid -->
   </nav>
 
@@ -79,11 +112,16 @@
   <script type="text/javascript" src="js/template/Tweet/TweetListComposite.js"></script>
   <script type="text/javascript" src="js/template/Tweet/TweetPostComposite.js"></script>
   <script type="text/javascript" src="js/template/Tweet/TweetPostPreviewItem.js"></script>
+  <script type="text/javascript" src="js/template/Setting/SettingLayout.js"></script>
+  <script type="text/javascript" src="js/template/Setting/SettingList.js"></script>
 
   <!-- Js Client Side Scripts -->
   <!-- Util -->
   <script type="text/javascript" src="js/app/Util/Static.js"></script>
   <script type="text/javascript" src="js/app/Util/Util.js"></script>
+
+  <!-- Setting -->
+  <script type="text/javascript" src="js/app/Setting/SettingView.js"></script>
 
   <!-- Tweet -->
   <script type="text/javascript" src="js/app/Tweet/TweetModel.js"></script>

@@ -9,6 +9,9 @@ var routeMap = {
   ,'userTweets'        : ':user/tweets'
   ,'userFollow'        : ':user/follow'
   ,'userFollower'      : ':user/follower'
+  ,'setting'           : 'setting'
+  ,'mypage'            : 'home'
+  ,'profile'           : 'profile'
 };
 
 // 呼び出しに便利なように、key value 逆で保持しているので入れ替え
@@ -18,6 +21,10 @@ for(var key in routeMap){
 }
 var router = Backbone.Marionette.AppRouter.extend({
   appRoutes: reverseMap
+
+  ,onRoute: function (name, path, arguments) {
+    console.log("aaa");
+  }
 })
 
 // model と view の結びつけを行う
@@ -51,6 +58,16 @@ var controller = Backbone.Marionette.Object.extend({
     tweetCollection.load()
   }
 
+  ,_toggleUserStaticCompact: function () {
+    var leftView = App.RootLayout.getChildView('left')
+    leftView.toggleViewMode(leftView.stateList.compact)
+  }
+
+  ,_toggleUserStaticEditable: function () {
+    var leftView = App.RootLayout.getChildView('left')
+    leftView.toggleViewMode(leftView.stateList.editable)
+  }
+
   ,_loadingCollections: []
 
   /* *********************************************************************************************
@@ -58,6 +75,7 @@ var controller = Backbone.Marionette.Object.extend({
   ********************************************************************************************* */
   ,welcome: function () {
     this._stopLoadings()
+    App.RootLayout.showChildView('left', new userStaticItemView())
 
     App.Collection.tweet = App.Collection.tweet || new tweetCollection()
 
@@ -66,6 +84,7 @@ var controller = Backbone.Marionette.Object.extend({
 
   ,tweets: function () {
     this._stopLoadings()
+    App.RootLayout.showChildView('left', new userStaticItemView())
 
     App.Collection.mytweet = App.Collection.mytweet || new tweetCollection()
 
@@ -74,6 +93,7 @@ var controller = Backbone.Marionette.Object.extend({
 
   ,follow: function () {
     this._stopLoadings()
+    App.RootLayout.showChildView('left', new userStaticItemView())
 
     var users = new Backbone.Collection()
     App.RootLayout.showChildView('main', new userCompositeView({
@@ -86,6 +106,7 @@ var controller = Backbone.Marionette.Object.extend({
 
   ,follower: function () {
     this._stopLoadings()
+    App.RootLayout.showChildView('left', new userStaticItemView())
 
     var users = new Backbone.Collection()
     App.RootLayout.showChildView('main', new userCompositeView({
@@ -97,15 +118,32 @@ var controller = Backbone.Marionette.Object.extend({
   }
 
   ,userTweets: function (user) {
-
+    console.log(user)
+    App.RootLayout.showChildView('left', new userStaticItemView())
   }
 
   ,userFollow: function (user) {
-
+    console.log(user)
+    App.RootLayout.showChildView('left', new userStaticItemView())
   }
 
   ,userFollower: function (user) {
+    console.log(user)
+    App.RootLayout.showChildView('left', new userStaticItemView())
+  }
 
+  ,mypage: function () {
+    App.RootLayout.showChildView('left', new userStaticItemView())
+    App.RootLayout.showChildView('main', new myPageLayoutView())
+  }
+
+  ,profile: function () {
+    App.RootLayout.showChildView('left', new userStaticItemView())
+
+  }
+
+  ,setting: function () {
+    App.RootLayout.showChildView('left', new settingListView())
   }
 })
 
@@ -127,12 +165,12 @@ $(function(){
     // message pattern (implementing by Wreqr.RequestResponse)
     App.wreqr = new Backbone.Wreqr.RequestResponse();
     App.wreqr.setHandlers({
-       navigate: function (to) {
+      navigate: function (to) {
         Backbone.history.navigate(to, true)
       }
       ,postTweet: function ($form) {
         App.Collection.tweet.add({
-           title: 'ubuntu'
+          title: 'ubuntu'
           ,content: $form.find('#tweet-input').val()
           ,date: moment()
         })
@@ -141,7 +179,6 @@ $(function(){
         return /*TODO 通信*/ "UUID:J3aojfa532el4akK"
       }
     })
-
     App.RootLayout.showChildView('left', new userStaticItemView())
   });
 

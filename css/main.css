@@ -22,6 +22,16 @@ span.glyphicon {
   font-size: 20px;
 }
 
+img.editable {
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.nav span.glyphicon {
+  top: 5px;
+}
+
 .col {
   position: absolute;
   top: 70px;
@@ -64,6 +74,10 @@ span.glyphicon {
   font-size: 30px
 }
 
+.panel-padding {
+  padding: 10px;
+}
+
 .panel-footer-action{
   padding: 10px 40px;
   border-top: 1px solid #ddd;
@@ -77,6 +91,18 @@ span.glyphicon {
 .panel-footer-action > a:hover {
   color: #337ab7;
 }
+
+.caret-right {
+    border-bottom: 4px solid transparent;
+    border-top: 4px solid transparent;
+    border-left: 4px solid;
+    display: inline-block;
+    height: 0;
+    opacity: 0.3;
+    vertical-align: top;
+    width: 0;
+}
+
 #detail{
   left: 25%;
   width: 50%;

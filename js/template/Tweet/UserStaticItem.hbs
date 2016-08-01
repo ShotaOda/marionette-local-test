@@ -1,8 +1,8 @@
 <div class="panel panel-default hidden-xs" style="position: fixed; width: 20%; min-width: 200px;">
   <div class="panel-body">
-    <img src="image/pizza.jpg" alt="ユーザー" class="img-circle center-block">
-    <p>username</p>
-    <div class="list-group">
+    <img src="image/pizza.jpg" alt="ユーザー" id="user-image" class="img-circle center-block">
+    <h3 id="user-name">username</h3>
+    <div id="action-list" class="list-group">
       <a id="button-navigation-myTweet" class="list-group-item">
         <h4 class="list-group-item-heading">ツイート</h4>
         <p class="list-group-item-text">xxx</p>
@@ -15,6 +15,19 @@
         <h4 class="list-group-item-heading">フォローワー</h4>
         <p class="list-group-item-text">zzz</p>
       </a>
+    </div>
+    <div id="user-edit-list">
+      <br>
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">
+          <span class="glyphicon glyphicon-user"></span>
+        </span>
+        <input type="text" class="form-control" placeholder="@username" aria-describedby="basic-addon1">
+      </div>
+      <br>
+      <textarea class="form-control" rows="3" placeholder="自己紹介..."></textarea>
+      <br>
+      <button type="button" class="btn btn-default pull-right">変更する</button>
     </div>
   </div>
 </div>

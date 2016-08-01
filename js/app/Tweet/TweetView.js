@@ -1,15 +1,35 @@
 var userStaticItemView = Backbone.Marionette.ItemView.extend({
   template: TMPL['UserStaticItem.hbs']
   ,ui: {
-    "navigatetweet": "#button-navigation-myTweet"
-    ,"navigatefollow": "#button-navigation-myFollow"
-    ,"navigatefollower": "#button-navigation-myFollower"
+     'navigatetweet'   : '#button-navigation-myTweet'
+    ,'navigatefollow'  : '#button-navigation-myFollow'
+    ,'navigatefollower': '#button-navigation-myFollower'
+    ,'actionlist'      : '#action-list'
+    ,'editlist'        : '#user-edit-list'
+    ,'userimage'       : '#user-image'
+    ,'username'        : '#user-name'
   }
   // ※ -(ハイフン)があると認識しないので注意
   ,events: {
-    "click @ui.navigatetweet": "onClickNavTweet"
-    ,"click @ui.navigatefollow": "onClickNavFollow"
-    ,"click @ui.navigatefollower": "onClickNavFollower"
+     'click @ui.navigatetweet'   : 'onClickNavTweet'
+    ,'click @ui.navigatefollow'  : 'onClickNavFollow'
+    ,'click @ui.navigatefollower': 'onClickNavFollower'
+  }
+
+  ,state: {}
+
+  ,stateList: {
+     compact  : 'compact'
+    ,editable : 'editable'
+  }
+
+  ,initialize: function () {
+  }
+
+  ,onAttach: function () {
+    this.ui.actionlist.show()
+    this.ui.editlist.hide()
+    this.state = this.stateList.compact
   }
 
   // event functions
@@ -26,6 +46,20 @@ var userStaticItemView = Backbone.Marionette.ItemView.extend({
   ,onClickNavFollower: function () {
     App.wreqr.request('navigate',routeMap.follower)
     this._activeList(this.ui.navigatefollower)
+  }
+
+  ,toggleViewMode: function (to) {
+    if (to == this.stateList.editable){
+      this.ui.actionlist.hide()
+      this.ui.username.hide()
+      this.ui.editlist.show()
+      this.ui.userimage.addClass('editable')
+    } else if (to == this.stateList.compact){
+      this.ui.actionlist.show()
+      this.ui.username.show()
+      this.ui.editlist.hide()
+      this.ui.userimage.removeClass('editable')
+    }
   }
 
   ,_activeList: function (target) {
