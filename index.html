@@ -37,7 +37,7 @@
 
 </head>
 <body>
-  <nav class="navbar navbar-default navbar-fixed-top">
+  <nav id="navigation-container" class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-offset-1 col-md-9">
@@ -53,13 +53,13 @@
           </div>
           <div class="collapse navbar-collapse" id="MenuCollapse">
             <ul class="nav navbar-nav">
-              <li id="nav-tweetlist">
+              <li id="nav-tweetlist"  class="nav-link">
                 <a href="#">
                   <span class="glyphicon glyphicon-menu-hamburger"></span>
                   ツイートリスト
                 </a>
               </li>
-              <li id="nav-mypage">
+              <li id="nav-mypage" class="nav-link">
                 <a href="#home">
                   <span class="glyphicon glyphicon-info-sign"></span>
                   マイページ
@@ -67,7 +67,7 @@
               </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li id="nav-user" class="dropdown">
+              <li id="nav-user" class="dropdown nav-link">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                   <span class="glyphicon glyphicon-user"></span>
                   ubuntu
@@ -79,7 +79,7 @@
                   <li><a href="#">ログアウト</a></li>
                 </ul>
               </li>
-              <li id="nav-setting" class="dropdown">
+              <li id="nav-setting" class="dropdown nav-link">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                   <span class="glyphicon glyphicon-cog"></span>
                   設定
@@ -126,6 +126,9 @@
   <!-- Tweet -->
   <script type="text/javascript" src="js/app/Tweet/TweetModel.js"></script>
   <script type="text/javascript" src="js/app//Tweet/TweetView.js"></script>
+
+  <!-- Navigation View-->
+  <script type="text/javascript" src="js/app/NavigationView.js"></script>
 
   <!-- Layout View-->
   <script type="text/javascript" src="js/app/RootLayoutView.js"></script>

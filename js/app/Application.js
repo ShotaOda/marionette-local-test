@@ -75,6 +75,8 @@ var controller = Backbone.Marionette.Object.extend({
   ********************************************************************************************* */
   ,welcome: function () {
     this._stopLoadings()
+    var nav = App.NavigationView;
+    nav.changeState(nav.state.LIS)
     App.RootLayout.showChildView('left', new userStaticItemView())
 
     App.Collection.tweet = App.Collection.tweet || new tweetCollection()
@@ -84,6 +86,8 @@ var controller = Backbone.Marionette.Object.extend({
 
   ,tweets: function () {
     this._stopLoadings()
+    var nav = App.NavigationView;
+    nav.changeState(nav.state.LIS)
     App.RootLayout.showChildView('left', new userStaticItemView())
 
     App.Collection.mytweet = App.Collection.mytweet || new tweetCollection()
@@ -93,6 +97,8 @@ var controller = Backbone.Marionette.Object.extend({
 
   ,follow: function () {
     this._stopLoadings()
+    var nav = App.NavigationView;
+    nav.changeState(nav.state.LIS)
     App.RootLayout.showChildView('left', new userStaticItemView())
 
     var users = new Backbone.Collection()
@@ -106,6 +112,8 @@ var controller = Backbone.Marionette.Object.extend({
 
   ,follower: function () {
     this._stopLoadings()
+    var nav = App.NavigationView;
+    nav.changeState(nav.state.LIS)
     App.RootLayout.showChildView('left', new userStaticItemView())
 
     var users = new Backbone.Collection()
@@ -133,16 +141,22 @@ var controller = Backbone.Marionette.Object.extend({
   }
 
   ,mypage: function () {
+    var nav = App.NavigationView;
+    nav.changeState(nav.state.MYP)
     App.RootLayout.showChildView('left', new userStaticItemView())
     App.RootLayout.showChildView('main', new myPageLayoutView())
   }
 
   ,profile: function () {
+    var nav = App.NavigationView;
+    nav.changeState(nav.state.USR)
     App.RootLayout.showChildView('left', new userStaticItemView())
 
   }
 
   ,setting: function () {
+    var nav = App.NavigationView;
+    nav.changeState(nav.state.SET)
     App.RootLayout.showChildView('left', new settingListView())
   }
 })
@@ -159,6 +173,10 @@ $(function(){
     // ルーティング生成
     App.Router = new router({
       controller: new controller()
+    })
+
+    App.Router.on('route', function(route, param){
+
     })
 
     // イベントハンドラー生成
@@ -185,6 +203,7 @@ $(function(){
   App.on('application: start', function () {
     console.log('start');
 
+    App.NavigationView = new navigationView();
     Backbone.history.start();
     Backbone.history.navigate(routeMap.welcome, true)
   });
